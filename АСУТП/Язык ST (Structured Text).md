@@ -1,5 +1,5 @@
 # Язык ST (Structured Text)
-[Романов С. - Изучаем Structured Text стандарта МЭК 61131-3. Версия 1.207.0. Read, 2021. - 307 с](https://github.com/user-attachments/files/23333828/Romanov_S_-_Izuchaem_Structured_Text_standarta_MEK_61131-3_Versia_1_207_0_Read_2021_-_307_s.pdf)
+[Романов С. - Изучаем Structured Text стандарта МЭК 61131-3. Версия 1.207.0. Read, 2021. - 307 с]([https://github.com/user-attachments/files/23333828/Romanov_S_-_Izuchaem_Structured_Text_standarta_MEK_61131-3_Versia_1_207_0_Read_2021_-_307_s.pdf](https://vk.com/topic-220472442_50232048))
 
 Обновление параметров
 
