@@ -1,3 +1,4 @@
+[Команды Linux](https://linux-faq.ru/page/komandy-linux)  
 [ПРОтехнологии - Linux](youtube.com/watch?v=ig62gHNuIsw&list=PLsoQpy2pA0YJcJ0Fn7bKhX0yDC6o3tROD&index=1) (плейлист, 18 видео)
 
 Astra Linux:  
