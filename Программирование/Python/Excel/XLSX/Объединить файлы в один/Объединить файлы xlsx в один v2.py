@@ -11,7 +11,6 @@ from datetime import datetime
 # Подавляем предупреждения openpyxl, которые могут возникать при работе с файлами
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
-# --- Настройки ---
 OUTPUT_FILENAME = "output.xlsx"
 LOG_FILENAME = "log.log"  # Имя файла для сохранения логов
 PROGRESS_STEP = 5000  # Шаг для вывода прогресса в консоль (каждые N строк)
