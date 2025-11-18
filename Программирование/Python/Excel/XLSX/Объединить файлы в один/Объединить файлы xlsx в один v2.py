@@ -215,8 +215,7 @@ else:
         print(" " * 80, end='\r')
         sys.stdout.flush()
         log_message(f"Уведомление: Запись всех {total_rows} строк в лист завершена.")
-        # --- КОНЕЦ ЦИКЛА ЗАПИСИ ---
-
+      
         # Сохраняем результат
         log_message(f"Уведомление: Сохраняю итоговый файл {OUTPUT_FILENAME}. Это может занять время...")
         wb.save(OUTPUT_FILENAME)
