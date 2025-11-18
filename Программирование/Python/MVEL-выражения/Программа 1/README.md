@@ -13,3 +13,5 @@ Double DF15; if (Fn.badVal($F15, '*')) {DF15 = 0} else {DF15 = F15};
 Double DLOSKON; if (Fn.badVal($LOSKON, '*')) {DLOSKON = 0} else {DLOSKON = LOSKON};  
 Double Debalance = DF219 + ... + DFA01 + (DF15 + ... + DLOSKON) * (-1); Debalance  
 В конце требуется через notepad удалить только переносы строк регуляркой \r\n  
+
+<img width="1920" height="996" alt="image" src="https://github.com/user-attachments/assets/cff22fc0-7fe6-4683-9eb8-c1ee24cf425d" />
