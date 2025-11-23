@@ -1,3 +1,5 @@
+- [Заметки md: Личные рекомендации по оформлению кода](./rec_py.md)
+
 - IDE:  
   - [PyCharm](https://www.jetbrains.com/ru-ru/pycharm/download/?section=windows)  
   - [Anaconda Jupyter Lab](https://www.anaconda.com/download)  
