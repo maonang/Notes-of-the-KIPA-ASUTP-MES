@@ -32,7 +32,7 @@ if __name__ == "__main__":
     main()
 ```
 
-- Отключение предупреждений модуля openpyxl
+- Отключение предупреждений модуля openpyxl о Data Validation extension
 ```python
 import warnings
 warnings.filterwarnings("ignore", message="Data Validation extension is not supported")
