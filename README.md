@@ -1,2 +1,2 @@
-# Notes-of-the-KIPA-ASUTP-MES
-Заметки инженера КИПиА / АСУТП / MES
+# Заметки инженера КИПиА / АСУТП / MES  
+https://vk.com/notes_asutp  

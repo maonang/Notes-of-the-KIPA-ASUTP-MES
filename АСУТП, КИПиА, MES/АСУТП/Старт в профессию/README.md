@@ -1,0 +1,4 @@
+# Профстандарты
+- [19.070](https://classinform.ru/profstandarty/19.070-spetcialist-po-ekspluatatcii-avtomatizirovannykh-sistem-upravleniia-tekhnologicheskimi-protcessami-v-neftegazovoi-otrasli.html) - Специалист по эксплуатации автоматизированных систем управления технологическими процессами в нефтегазовой отрасли  
+- [40.178](https://classinform.ru/profstandarty/40.178-spetcialist-v-oblasti-proektirovaniia-avtomatizirovannykh-sistem-upravleniia-tekhnologicheskimi-protcessami.html) - Специалист по проектированию автоматизированных систем управления технологическими процессами  
+- [24.121](https://classinform.ru/profstandarty/24.121-spetcialist-po-proektirovaniiu-avtomatizirovannykh-sistem-upravleniia-tekhnologicheskimi-protcessami-obektov-ispolzovaniia-atomnoi-energii.html) - Специалист по проектированию автоматизированных систем управления технологическими процессами объектов использования атомной энергии  

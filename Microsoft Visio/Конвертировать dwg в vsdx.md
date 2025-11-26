@@ -1,0 +1,3 @@
+Решение: Вид - Надстройки - Дополнительные решения Visio - Преобразовать чертежи САПР...  
+<img width="2094" height="732" alt="image" src="https://github.com/user-attachments/assets/8884064e-fadd-4f8b-8c3f-b6096976de6f" />
+[Статья: _Источник_](https://support.microsoft.com/ru-ru/topic/преобразование-нескольких-чертежей-autocad-0ed41e18-97bf-4c4f-aaed-96533fef35da)

@@ -1,0 +1,2 @@
+- [Установка ЭЛОУ-АВТ-6](https://pronpz.ru/ustanovki/avt-6.html)  
+- [Статья "ХимТех - НПЗ"](https://vk.com/@-131736554-npz)  
