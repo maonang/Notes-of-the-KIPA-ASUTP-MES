@@ -1,13 +1,6 @@
 ### Обязательное объявление переменных
 `Option Explicit`
 
-### Переход к метке Err_label в случае возникновения ошибки
-```vba
-On Error GoTo Err_label
-Err_label:
-...
-```
-
 ### Активировать окно MS Word с названием в переменной FileName
 `Windows(FileName).Activate`
 
