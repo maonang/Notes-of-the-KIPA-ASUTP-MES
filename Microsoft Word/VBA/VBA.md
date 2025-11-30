@@ -105,15 +105,3 @@ SaveAsAOCELetter:=False, _
 CompatibilityMode:=15
 ```
 
-### Добавление файла в виде объекта
-```vba
-Sub Добавить_файл_в_текст()
-Dim s_FileName As String
-s_FileName = InputBox("Имя файла", "Введите текст")
-Selection.InlineShapes.AddOLEObject ClassType:="Package", FileName:= _
-"D:\" + s_FileName + ".PNG" _
-, LinkToFile:=False, DisplayAsIcon:=False
-End Sub
-```
-<p align="left"><img src="https://github.com/user-attachments/assets/c1358af2-533d-4a18-9492-57be9b40ea3e" width="400" alt=""></p>  
-
