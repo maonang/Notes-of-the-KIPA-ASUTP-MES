@@ -38,15 +38,6 @@ Err_label:
 ### Вставить с сохранением форматирования
 `Selection.PasteAndFormat (wdFormatOriginalFormatting)`
 
-### Обработка ошибки
-```vba
-On Error Resume Next
-...
-If Err.Number <> 0 Then
-GoTo Err_label
-End If
-```
-
 ### Перейти к началу документа
 `Selection.HomeKey Unit:=wdStory`
 
