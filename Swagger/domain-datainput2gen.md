@@ -3,14 +3,12 @@ URL: .../domain-datainput2gen/index.html
 
 | Тип запроса | URL-адрес конечной точки (Endpoint URL) | Описание |
 | --- | --- | --- |
-| Audit | Аудит данных |
+|🟢🟡🔴| Audit | Аудит данных |
 | `GET`  | /api/v1/audit/in`PUT`-statuses | Получить список статусов ввода за период. |
 | `GET`  | /api/v1/audit/on-scheduled/data-states | Получить аудиторскую информацию данных ввода "По расписанию". |
 | `GET`  | /api/v1/audit/on-requirement/data-states | Получить аудиторскую информацию данных ввода для листов "По требованию". |
 | `GET`  | /api/v1/audit/data | Получить аудиторскую информацию данных ввода |
-| | | |
-| Configuration | Операции с конфигурациями листов ручного ввода. |
-| | | |
+|🟢🟡🔴| Configuration | Операции с конфигурациями листов ручного ввода. |
 | `POST`  | /api/v1/configs/group/root | Создать корневую группу |
 | `POST`  | /api/v1/configs/group/sheet | Создать группу-лист |
 | `PUT`  | /api/v1/configs/group/edit | Обновить данные группы. |
@@ -39,16 +37,14 @@ URL: .../domain-datainput2gen/index.html
 | `PUT`  | /api/v1/configs/sheet/copy | Копирование актуальной конфигурации через создание черновика. |
 | `GET`  | /api/v1/configs/sheet/parameter/platform-integration | Запрос данных конфигурации интеграции с платформой для параметра. |
 | `POST`  | /api/v1/configs/sheet/mark-om-outdated | Отметить конфигурацию параметров ОМ как устаревшую. |
-| | | |
-| Display | Настройки отображения параметров, групп параметров, листов и структурных элементов. |
-| | | |
+|🟢🟡🔴| Display | Настройки отображения параметров, групп параметров, листов и структурных элементов. |
 | `POST`  | /api/v1/display/parameter/hide | Скрыть параметр |
 | `POST`  | /api/v1/display/parameter/show | Показать параметр |
 | `POST`  | /api/v1/display/parameter-group/hide | Скрыть группу параметров |
 | `POST`  | /api/v1/display/parameter-group/show | Показать группы параметров |
 | `POST`  | /api/v1/display/structural-elemet/hide | Скрыть структурный элемент |
 | `POST`  | /api/v1/display/structural-elemet/show | Показать структурный элемент |
-| Platform | Интеграция с платформой. |
+|🟢🟡🔴| Platform | Интеграция с платформой. |
 | `GET`  | /api/v1/platform/models | Получить список моделей из платформы. |
 | `GET`  | /api/v1/platform/objects | Получить список объектов. |
 | `GET`  | /api/v1/platform/properties | Получить список свойств объекта. |
@@ -59,9 +55,7 @@ URL: .../domain-datainput2gen/index.html
 | `GET`  | /api/v1/platform/rtdb-search | Поиск тегов БДРВ по имени. |
 | `POST`  | /api/v1/platform/evaluate-expression | Вычисление выражения модулем MVEL. Применение: Проверка выполнения MVEL-выражений перед добавлением в расчетные поля формы ручного ввода |
 | `GET`  | /api/v1/platform/rtdb-search-by-property | Поиск тега БДРВ, привязанного к свойству объекта. |
-| | | |
-| ReferenceData | Операции со справочными данными. |
-| | | |
+|🟢🟡🔴| ReferenceData | Операции со справочными данными. |
 | `POST`  | /api/v1/reference-data/fill-csv | Замена записей справочника |
 | `GET`  | /api/v1/reference-data/items | Получить пользовательский справочник и его элементы. |
 | `GET`  | /api/v1/reference-data/export-csv | Экспорт справочника в CSV |
@@ -69,9 +63,7 @@ URL: .../domain-datainput2gen/index.html
 | `POST`  | /api/v1/reference-data/create | Создать новый справочник. |
 | `GET`  | /api/v1/reference-data/list | Получить список справочников. |
 | `PUT`  | /api/v1/reference-data/udpate | Обновить метаданные справочника. |
-| | | |
-| RequirementSheet | Операции с данными листов "По требованию". |
-| | | |
+|🟢🟡🔴| RequirementSheet | Операции с данными листов "По требованию". |
 | `POST`  | /api/v1/sheets/on-requirement/state | Создать состояние листа "по требованию". |
 | `GET`  | /api/v1/sheets/on-requirement/state | Запрос получения актуального состояния для листа по требованию. |
 | `GET`  | /api/v1/sheets/on-requirement/in`PUT`-data | Получить данные ввода за период в порядке убывания от самых новых данных ввода, до самых старых для листов с типом по требованию. |
@@ -84,9 +76,7 @@ URL: .../domain-datainput2gen/index.html
 | `PUT`  | /api/v1/sheets/on-requirement/state/in`PUT`-data/end-editing | Отключить режим редактирования листа для листа по требованию. |
 | `GET`  | /api/v1/sheets/on-requirement/last-in`PUT`-data-time | Получить время последних данных ввода для листов с типом по требованию. |
 | `PUT`  | /api/v1/sheets/on-requirement/state/in`PUT`-data/recover | Восстановление данных из родительской формы ввода. |
-| | | |
-| ScheduledSheet | Операции с данными листов "По расписанию". |
-| | | |
+|🟢🟡🔴| ScheduledSheet | Операции с данными листов "По расписанию". |
 | `POST`  | /api/v1/sheets/on-scheduled/state | Создать состояние листа "по расписанию". |
 | `GET`  | /api/v1/sheets/on-scheduled/state | Получить состояние листа "по расписанию". |
 | `GET`  | /api/v1/sheets/on-scheduled/in`PUT`-statuses | Получить статусы ввода за период в порядке убывания от самого нового состояния листа, до самого старого для листов с типом по расписанию. |
