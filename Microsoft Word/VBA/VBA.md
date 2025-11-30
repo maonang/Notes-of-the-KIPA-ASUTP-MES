@@ -53,14 +53,6 @@ End If
 ### Перейти в начало строки
 `Selection.HomeKey Unit:=wdLine`
 
-### Поиск разрыва страницы
-```vba
-With Selection.Find
-.Text = "^b"
-End With
-Selection.Find.Execute
-```
-
 ### Перейти на 1 строку выше
 `Selection.MoveUp Unit:=wdLine, Count:=1`
 
