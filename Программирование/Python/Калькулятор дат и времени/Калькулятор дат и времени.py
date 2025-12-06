@@ -1,3 +1,6 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 from datetime import datetime, timedelta, time, date
 import re
 from typing import Union, List, Tuple, Optional
@@ -601,4 +604,5 @@ def calculate():
 
 
 if __name__ == "__main__":
+
     calculate()
