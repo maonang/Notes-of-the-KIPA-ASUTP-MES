@@ -41,10 +41,11 @@
 ## Установка зависимостей
 ```python
 1. pip install --upgrade pip
-2. pip install \
-    tqdm \         # для прогресс-баров
-    aiofiles \     # для асинхронной работы с файлами
-    aiosqlite      # для асинхронной работы с SQLite
+2. pip install tqdm aiofiles aiosqlite
+Примечание:
+- tqdm - для прогресс-баров
+- aiofiles - для асинхронной работы с файлами
+- aiosqlite - для асинхронной работы с SQLite
 ```
 ## Примеры использования
 ```
