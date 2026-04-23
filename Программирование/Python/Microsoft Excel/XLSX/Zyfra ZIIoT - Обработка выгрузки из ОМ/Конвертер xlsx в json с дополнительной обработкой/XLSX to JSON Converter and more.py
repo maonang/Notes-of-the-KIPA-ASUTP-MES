@@ -1,9 +1,3 @@
-"""
-Модуль для преобразования Excel-файлов в структурированный JSON-словарь.
-Обрабатывает повторяющиеся ID, заполняя поля только если они были пустыми.
-Автоматически распаковывает JSON-строки в поле Configuration.
-"""
-
 import json
 from collections import defaultdict
 from pathlib import Path
