@@ -10,6 +10,48 @@ import pandas as pd
 warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
 
 
+class DataSorter:
+    """Класс для сортировки данных."""
+
+    @staticmethod
+    def sort_by_path(data_dict: Dict[str, Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
+        """
+        Сортирует корневые элементы словаря по параметру Path.
+
+        Args:
+            data_dict: Исходный словарь с данными
+
+        Returns:
+            Отсортированный словарь
+        """
+        # Создаем список кортежей (path, id, data)
+        items_with_path = []
+        items_without_path = []
+
+        for record_id, record_data in data_dict.items():
+            path = record_data.get('Path', '')
+            if path:
+                items_with_path.append((path, record_id, record_data))
+            else:
+                items_without_path.append((record_id, record_data))
+
+        # Сортируем по Path (лексикографически)
+        items_with_path.sort(key=lambda x: x[0])
+
+        # Собираем отсортированный словарь
+        sorted_dict = {}
+
+        # Сначала добавляем элементы с Path (отсортированные)
+        for path, record_id, record_data in items_with_path:
+            sorted_dict[record_id] = record_data
+
+        # Затем добавляем элементы без Path (в исходном порядке)
+        for record_id, record_data in items_without_path:
+            sorted_dict[record_id] = record_data
+
+        return sorted_dict
+
+
 class ExcelToJsonConverter:
     """Конвертер Excel файлов в JSON словарь с агрегацией по ID."""
 
@@ -251,6 +293,58 @@ class DataEnricher:
     """Класс для добавления вычисляемых полей из связанных свойств."""
 
     @staticmethod
+    def build_usage_map(data_dict: Dict[str, Dict[str, Any]]) -> Dict[str, List[Dict[str, Any]]]:
+        """
+        Строит карту использования свойств в расчетах.
+
+        Args:
+            data_dict: Словарь с данными
+
+        Returns:
+            Словарь вида {path: [список использований]}
+        """
+        usage_map: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
+
+        for record_id, record_data in data_dict.items():
+            # Проверяем, является ли свойство расчетным
+            if record_data.get('DataReference') != 'Calculation Tag':
+                continue
+
+            config = record_data.get('Configuration', {})
+            if 'variables' not in config:
+                continue
+
+            # Получаем путь текущего расчетного свойства
+            current_path = record_data.get('Path', '')
+            if not current_path:
+                continue
+
+            # Получаем tagId текущего расчетного свойства
+            current_tag_id = config.get('tagId', '')
+            if not current_tag_id or current_tag_id == '':
+                current_tag_id = f"SysTag_{record_id}"
+
+            # Получаем expression для текущего расчета
+            expression = config.get('expression', '')
+            truncated_expression = expression[:2000] + "..." if expression and len(expression) > 2000 else expression
+
+            # Проходим по всем переменным расчета
+            for var in config['variables']:
+                value_path = var.get('value')
+                alias = var.get('alias', '')
+
+                if value_path:
+                    usage_map[value_path].append({
+                        'param_property_path': current_path,
+                        'param_property_tagId': current_tag_id,
+                        'param_expression_alias': alias,
+                        'param_expression': truncated_expression or ''
+                    })
+
+        return usage_map
+
+
+    @staticmethod
     def enrich_data(data_dict: Dict[str, Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
         """
         Добавляет вычисляемые поля с информацией о связанных свойствах.
@@ -271,8 +365,17 @@ class DataEnricher:
                     'data': record_data
                 }
 
+        usage_map = DataEnricher.build_usage_map(data_dict)
+
         # Добавление вычисляемых полей для каждой записи
         for record_id, record_data in data_dict.items():
+            # Добавляем param_used для всех свойств, которые используются в расчетах
+            current_path = record_data.get('Path', '')
+            if current_path and current_path in usage_map:
+                record_data['param_used'] = usage_map[current_path]
+            else:
+                record_data['param_used'] = []  # Пустой список, если не используется другими свойствами
+
             if 'Configuration' not in record_data or not record_data['Configuration']:
                 continue
 
@@ -436,6 +539,41 @@ class JsonSaver:
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
+
+    def _reorder_dict(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Переупорядочивает словарь, чтобы param_used был последним ключом.
+
+        Args:
+            data: Исходный словарь
+
+        Returns:
+            Словарь с переупорядоченными ключами
+        """
+        if not isinstance(data, dict):
+            return data
+
+        result = {}
+
+        # Рекурсивно обрабатываем вложенные словари
+        for key, value in data.items():
+            if isinstance(value, dict):
+                result[key] = self._reorder_dict(value)
+            elif isinstance(value, list):
+                result[key] = [
+                    self._reorder_dict(item) if isinstance(item, dict) else item
+                    for item in value
+                ]
+            else:
+                result[key] = value
+
+        # Если есть ключ param_used, удаляем его и добавляем в конец
+        if 'param_used' in result:
+            param_used_value = result.pop('param_used')
+            result['param_used'] = param_used_value
+
+        return result
+
     @staticmethod
     def _json_serializer(obj: Any) -> Any:
         """
@@ -482,10 +620,13 @@ class JsonSaver:
 
         output_path: Path = self.output_dir / filename
 
+        # Переупорядочиваем данные, чтобы param_used был последним
+        reordered_data = self._reorder_dict(data)
+
         try:
             with open(output_path, 'w', encoding='utf-8') as f:
                 json.dump(
-                    data, f,
+                    reordered_data, f,
                     ensure_ascii=False,
                     indent=2,
                     default=self._json_serializer
@@ -512,7 +653,8 @@ def process_excel_to_json(
         filter_criteria: Optional[Dict[str, List[Any]]] = None,
         exclude_fields: Optional[List[str]] = None,
         show_analysis: bool = True,
-        enable_enrichment: bool = True
+        enable_enrichment: bool = True,
+        sort_by_path: bool = True
 ) -> Dict[str, Dict[str, Any]]:
     """
     Упрощённая функция для конвертации Excel в JSON.
@@ -553,6 +695,12 @@ def process_excel_to_json(
         data = DataEnricher.enrich_data(data)
         print("Готово.")
 
+    # Сортировка по Path
+    if sort_by_path:
+        print("\nСортировка элементов по параметру Path...")
+        data = DataSorter.sort_by_path(data)
+        print("Сортировка завершена.")
+
     if show_analysis:
         DataAnalyzer.analyze(data)
 
@@ -581,6 +729,7 @@ def main() -> Optional[Dict[str, Dict[str, Any]]]:
         "DataTypePath", "PropertyType", "UomPath", "PropertyPrimitivePath", "Type"
     ]
     ENABLE_ENRICHMENT: bool = True
+    SORT_BY_PATH: bool = True  # включить сортировку по Path
 
     try:
         result: Dict[str, Dict[str, Any]] = process_excel_to_json(
@@ -592,7 +741,8 @@ def main() -> Optional[Dict[str, Dict[str, Any]]]:
             filter_criteria=FILTER_CRITERIA,
             exclude_fields=EXCLUDE_FIELDS,
             show_analysis=True,
-            enable_enrichment=ENABLE_ENRICHMENT
+            enable_enrichment=ENABLE_ENRICHMENT,
+            sort_by_path=SORT_BY_PATH
         )
 
         print(f"\n{'=' * 60}")
