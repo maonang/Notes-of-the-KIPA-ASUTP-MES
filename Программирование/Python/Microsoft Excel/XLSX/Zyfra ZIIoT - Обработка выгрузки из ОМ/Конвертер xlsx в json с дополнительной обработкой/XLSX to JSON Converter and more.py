@@ -343,7 +343,6 @@ class DataEnricher:
 
         return usage_map
 
-
     @staticmethod
     def enrich_data(data_dict: Dict[str, Dict[str, Any]]) -> Dict[str, Dict[str, Any]]:
         """
@@ -384,30 +383,10 @@ class DataEnricher:
 
             # Добавление полей только для Calculation Tag
             if current_data_reference == 'Calculation Tag':
-                # Генерация tagId при отсутствии
+                # Генерация tagId при отсутствии (только в Configuration)
                 if 'tagId' in config:
                     if not config['tagId'] or config['tagId'] == '':
                         config['tagId'] = f"SysTag_{record_id}"
-                        # print(f"  Для ID {record_id} сгенерирован tagId: {config['tagId']}")
-
-                # Добавление par_tag
-                record_data['par_tag'] = config.get('tagId', '')
-
-                # Добавление param_expression с обрезанием при длине > 2000
-                if 'expression' in config:
-                    expression: Optional[str] = config['expression']
-                    if expression and len(expression) > 2000:
-                        record_data['param_expression'] = expression[:2000] + "..."
-                        # print(f"  Для ID {record_id} выражение обрезано (было {len(expression)} символов)")
-                    else:
-                        record_data['param_expression'] = expression
-                else:
-                    record_data['param_expression'] = ''
-
-                # Добавление параметров расчёта
-                record_data['par_calc_type'] = config.get('triggerType', '')
-                record_data['par_calc_offset'] = config.get('offsetInSeconds', None)
-                record_data['par_calc_period'] = config.get('periodInSeconds', None)
 
                 # Обработка variables для Calculation Tag
                 if 'variables' in config:
